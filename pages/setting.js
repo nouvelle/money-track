@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/header";
 import Nav from "../components/nav";
 
-const About = () => (
+const Setting = () => (
   <div>
     <Header />
     <Nav page={"Setting"} />
@@ -10,4 +10,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default Setting;
