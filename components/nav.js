@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 const links = [
   { href: "/", label: "Input" },
@@ -53,12 +52,12 @@ const Nav = props => {
         padding: 6px 8px;
       }
       a {
-        color: #067df7;
+        color: #666;
         text-decoration: none;
         font-size: 16px;
       }
-      .selected{
-        background: #ccc;
+      .selected a {
+        color: #067df7;
       }
     `}</style>
     </nav>
