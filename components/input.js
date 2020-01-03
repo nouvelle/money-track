@@ -1,7 +1,7 @@
 import React from "react";
 /* Component */
-import Header from "./header";
-import Nav from "./nav";
+import Header from "./Header";
+import Nav from "./Nav";
 import InputForm from "./InputForm";
 
 const Input = () => (
