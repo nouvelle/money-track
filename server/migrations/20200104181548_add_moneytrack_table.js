@@ -7,20 +7,22 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable();
 
-    t.foreign("user_id")
-      .references("user_id")
-      .inTable("userlist");
+    t.foreign("user_id").references("userlist.user_id");
 
-    t.timestamp("date") // maximum length of 300 characters
+    t.integer("year") // -2147483648 ~ +2147483647
+      .notNullable(); // add a not-null constraint to this column
+    t.integer("month") // -2147483648 ~ +2147483647
+      .notNullable(); // add a not-null constraint to this column
+    t.integer("day") // -2147483648 ~ +2147483647
       .notNullable(); // add a not-null constraint to this column
 
-    t.string("item", 20) // maximum length of 300 characters
+    t.string("item", 20) // maximum length of 20 characters
       .notNullable(); // add a not-null constraint to this column
 
-    t.integer("price", 10) // maximum length of 300 characters
+    t.integer("price") // -2147483648 ~ +2147483647
       .notNullable(); // add a not-null constraint to this column
 
-    t.integer("payment", 10) // maximum length of 300 characters
+    t.integer("payment") // -2147483648 ~ +2147483647
       .notNullable(); // add a not-null constraint to this column
 
     t.timestamp("created_at")

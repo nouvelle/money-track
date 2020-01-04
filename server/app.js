@@ -37,18 +37,36 @@ app.get("/api", async (req, res) => {
   }
 });
 // Get :type=day/month query: date=yymmdd/date=yymm
-//   day   : /api/urllist/day?date=2001
-//   month : /api/urllist/month?date=200101
+//   day   : /api/urllist/day?date=202001
+//   month : /api/urllist/month?date=20200101
 app.get("/api/urllist/:type", async (req, res) => {
   const { type } = req.params;
   let { date } = req.query;
   try {
     // URL check
-    if (type === "day" && /^\d{6}$/.test(date)) {
-      const track = await db.select().table("track");
+    if (type === "day" && /^\d{8}$/.test(date)) {
+      const year = String(date).slice(0, 4);
+      const month = String(date).slice(4, 6);
+      const day = String(date).slice(6);
+      const track = await db
+        .select()
+        .table("track")
+        .where({
+          year: year,
+          month: month,
+          day: day
+        });
       res.json(track);
-    } else if (type === "month" && /^\d{4}$/.test(date)) {
-      const track = await db.select().table("track");
+    } else if (type === "month" && /^\d{6}$/.test(date)) {
+      const year = String(date).slice(0, 4);
+      const month = String(date).slice(4, 6);
+      const track = await db
+        .select()
+        .table("track")
+        .where({
+          year: year,
+          month: month
+        });
       res.json(track);
     } else {
       console.error("Bad request - Request URL Error");
