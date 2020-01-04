@@ -3,16 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "client": "next start",
+    "make": "knex migrate:make --knexfile ./server/knexfile.js add_moneytrack_table",
+    "migrate": "knex migrate:latest --knexfile ./server/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile ./server/knexfile.js",
+    "seed": "knex seed:run --knexfile ./server/knexfile.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.20.6",
     "next": "9.1.6",
+    "pg": "^7.17.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-redux": "^7.1.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
