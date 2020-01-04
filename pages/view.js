@@ -2,7 +2,7 @@ import React from "react";
 /* Component */
 import Header from "../components/Header";
 import Nav from "../components/Nav";
-import Usage from "../components/usage";
+import Usage from "../components/Usage";
 
 const Profile = () => (
   <div>
