@@ -30,22 +30,37 @@ app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "out")));
 app.get("/api", async (req, res) => {
   try {
-    res.send("Hello Coffee! - /api");
+    res.send("Hello Money Track! - /api");
   } catch (err) {
     console.error("Error loading locations!", err);
     res.sendStatus(500);
   }
 });
-// app.get("/api/urllist", async (req, res) => {
-//   try {
-//     const coffeeTable = await db.select().table("coffeetime");
-//     res.json(coffeeTable);
-//   } catch (err) {
-//     console.error("Error loading locations!", err);
-//     res.sendStatus(500);
-//   }
-// });
+// Get :type=day/month query: date=yymmdd/date=yymm
+//   day   : /api/urllist/day?date=2001
+//   month : /api/urllist/month?date=200101
+app.get("/api/urllist/:type", async (req, res) => {
+  const { type } = req.params;
+  let { date } = req.query;
+  try {
+    // URL check
+    if (type === "day" && /^\d{6}$/.test(date)) {
+      const track = await db.select().table("track");
+      res.json(track);
+    } else if (type === "month" && /^\d{4}$/.test(date)) {
+      const track = await db.select().table("track");
+      res.json(track);
+    } else {
+      console.error("Bad request - Request URL Error");
+      res.sendStatus(400);
+    }
+  } catch (err) {
+    console.error("Error loading locations!", err);
+    res.sendStatus(500);
+  }
+});
 
+// Insert
 // app.post("/api/urllist", async (req, res) => {
 //   const body = req.body;
 //   try {
