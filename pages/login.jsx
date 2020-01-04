@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 
-const Profile = () => (
+const Login = () => (
   <div>
     <Header />
     <Nav page={"Login"} />
@@ -21,4 +21,4 @@ const Profile = () => (
   </div>
 );
 
-export default Profile;
+export default Login;

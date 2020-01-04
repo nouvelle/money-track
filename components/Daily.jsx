@@ -1,9 +1,10 @@
 import React from "react";
 
-const Usage = () => {
+const Daily = props => {
+  console.log(props);
   return (
     <div className="tableArea">
-      <table></table>
+      <p>Daily Page</p>
       <style jsx>{`
         .tableArea {
           max-width: 880px;
@@ -13,4 +14,4 @@ const Usage = () => {
   );
 };
 
-export default Usage;
+export default Daily;
