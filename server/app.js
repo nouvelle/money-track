@@ -68,13 +68,43 @@ app.get("/api/urllist/:type", async (req, res) => {
           month: month
         });
       const dataset = {};
+      const dailyDataset = {};
+      let yearName = "";
+      let monthName = "";
+      let daySpots = 0;
+
       for (const data of track) {
         dataset[data.payment]
           ? (dataset[data.payment] += data.price)
           : (dataset[data.payment] = data.price);
+        dailyDataset[data.day]
+          ? (dailyDataset[data.day] += data.price)
+          : (dailyDataset[data.day] = data.price);
+        if (!yearName) yearName = data.year;
+        if (!monthName) monthName = data.month;
       }
-      res.json(dataset);
-      // res.json(track);
+
+      // Number of day
+      if (monthName === (1 || 3 || 5 || 7 || 8 || 10 || 12)) {
+        daySpots = 31;
+      } else if (monthName === (4 || 6 || 9 || 11)) {
+        daySpots = 30;
+      } else if (
+        (yearName % 4 === 0 && yearName % 100 !== 0) ||
+        yearName % 400 === 0
+      ) {
+        daySpots = 29;
+      } else {
+        daySpots = 28;
+      }
+
+      // response
+      res.json({
+        payment: dataset,
+        month: month,
+        daySpots: daySpots,
+        daily: dailyDataset
+      });
     } else {
       console.error("Bad request - Request URL Error");
       res.sendStatus(400);

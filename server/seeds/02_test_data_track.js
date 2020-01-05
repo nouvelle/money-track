@@ -7,6 +7,15 @@ exports.seed = function(knex) {
       return knex("track").insert([
         {
           user_id: "eriko",
+          year: 2019,
+          month: 12,
+          day: 31,
+          item: "coffee",
+          price: 350,
+          payment: "Cash"
+        },
+        {
+          user_id: "eriko",
           year: 2020,
           month: 1,
           day: 1,
@@ -49,6 +58,15 @@ exports.seed = function(knex) {
           item: "lunch",
           price: 650,
           payment: "Amex"
+        },
+        {
+          user_id: "eriko",
+          year: 2020,
+          month: 2,
+          day: 2,
+          item: "lunch",
+          price: 650,
+          payment: "Edy"
         }
       ]);
     });
