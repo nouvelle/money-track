@@ -2,8 +2,8 @@ import React from "react";
 
 const links = [
   { href: "/", label: "Input" },
-  { href: "/view", label: "View" },
-  { href: "/setting", label: "Setting" },
+  { href: "/daily", label: "Daily" },
+  { href: "/monthly", label: "Monthly" },
   { href: "/login", label: "Login" }
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`;

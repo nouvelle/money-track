@@ -101,7 +101,6 @@ app.get("/api/urllist/:type", async (req, res) => {
       // response
       res.json({
         payment: dataset,
-        month: month,
         daySpots: daySpots,
         daily: dailyDataset
       });
