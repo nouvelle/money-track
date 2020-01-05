@@ -1,4 +1,5 @@
 import React from "react";
+/* Component */
 import Piechart from "./Piechart";
 import Barchart from "./Barchart";
 

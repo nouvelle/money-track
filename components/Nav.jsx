@@ -31,8 +31,7 @@ const Nav = props => {
       <style jsx>{`
       :global(body) {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
+        font-family: "Concert One", cursive;
       }
       nav {
         text-align: center;

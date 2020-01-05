@@ -1,13 +1,14 @@
 import React from "react";
+/* Component */
+import DailyTable from "./DailyTable";
 
 const Day = props => {
-  console.log(props);
   return (
     <div className="daily">
       {props.data.length === 0 ? (
         <p className="noEntry">No Entry</p>
       ) : (
-        <p>Daily Page</p>
+        <DailyTable data={props.data} />
       )}
       <style jsx>{`
         .daily {

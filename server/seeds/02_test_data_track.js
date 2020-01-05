@@ -62,6 +62,15 @@ exports.seed = function(knex) {
         {
           user_id: "eriko",
           year: 2020,
+          month: 1,
+          day: 3,
+          item: "lunch",
+          price: 1000,
+          payment: "Amex"
+        },
+        {
+          user_id: "eriko",
+          year: 2020,
           month: 2,
           day: 2,
           item: "lunch",
