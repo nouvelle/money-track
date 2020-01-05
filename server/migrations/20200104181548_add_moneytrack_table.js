@@ -22,7 +22,7 @@ exports.up = function(knex) {
     t.integer("price") // -2147483648 ~ +2147483647
       .notNullable(); // add a not-null constraint to this column
 
-    t.integer("payment") // -2147483648 ~ +2147483647
+    t.string("payment", 20) // maximum length of 20 characters
       .notNullable(); // add a not-null constraint to this column
 
     t.timestamp("created_at")

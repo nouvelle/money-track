@@ -67,7 +67,14 @@ app.get("/api/urllist/:type", async (req, res) => {
           year: year,
           month: month
         });
-      res.json(track);
+      const dataset = {};
+      for (const data of track) {
+        dataset[data.payment]
+          ? (dataset[data.payment] += data.price)
+          : (dataset[data.payment] = data.price);
+      }
+      res.json(dataset);
+      // res.json(track);
     } else {
       console.error("Bad request - Request URL Error");
       res.sendStatus(400);

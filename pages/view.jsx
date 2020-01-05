@@ -14,7 +14,7 @@ const View = props => {
       <Header />
       <Nav page={"View"} />
       <h1 className="title">Today's usage history</h1>
-      <Daily />
+      {/* <Daily /> */}
       <Monthly data={monthly} />
 
       <style jsx>{`

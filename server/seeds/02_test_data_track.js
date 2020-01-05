@@ -12,7 +12,7 @@ exports.seed = function(knex) {
           day: 1,
           item: "coffee",
           price: 400,
-          payment: 1
+          payment: "Cash"
         },
         {
           user_id: "eriko",
@@ -21,7 +21,7 @@ exports.seed = function(knex) {
           day: 1,
           item: "cake",
           price: 550,
-          payment: 1
+          payment: "Edy"
         },
         {
           user_id: "eriko",
@@ -30,7 +30,7 @@ exports.seed = function(knex) {
           day: 1,
           item: "clothes",
           price: 5500,
-          payment: 2
+          payment: "Amex"
         },
         {
           user_id: "eriko",
@@ -39,7 +39,7 @@ exports.seed = function(knex) {
           day: 2,
           item: "snack",
           price: 100,
-          payment: 0
+          payment: "Edy"
         },
         {
           user_id: "eriko",
@@ -48,7 +48,7 @@ exports.seed = function(knex) {
           day: 2,
           item: "lunch",
           price: 650,
-          payment: 0
+          payment: "Amex"
         }
       ]);
     });

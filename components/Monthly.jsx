@@ -1,14 +1,16 @@
 import React from "react";
+import Piechart from "./Piechart";
+import Barchart from "./Barchart";
 
 const Monthly = props => {
-  console.log("monthly", props);
   return (
-    <div className="tableArea">
-      <p>Monthly Page</p>
+    <div className="monthly">
+      <Piechart data={props.data} />
+      <Barchart data={props.data} />
       <style jsx>{`
-        .tableArea {
+        .monthly {
           max-width: 880px;
-          margin: 80px auto 40px;
+          margin: 10px auto 20px;
       `}</style>
     </div>
   );

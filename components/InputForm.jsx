@@ -66,11 +66,11 @@ const InputForm = () => {
             <option value="" hidden>
               How did you pay?
             </option>
-            <option value="1">Cash</option>
-            <option value="2">Edy</option>
-            <option value="3">Amex (credit card)</option>
-            <option value="4">View (credit card)</option>
-            <option value="5">Other</option>
+            <option value="Cash">Cash</option>
+            <option value="Edy">Edy</option>
+            <option value="Amex">Amex (credit card)</option>
+            <option value="View">View (credit card)</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div className="wrapButton">
