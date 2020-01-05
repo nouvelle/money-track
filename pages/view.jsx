@@ -8,7 +8,6 @@ import Monthly from "../components/Monthly";
 
 const View = props => {
   const monthly = props.data;
-  console.log(monthly);
   return (
     <div>
       <Header />
