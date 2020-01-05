@@ -17,15 +17,16 @@ const Input = () => (
     <style jsx>{`
       .wrapInputPage {
         width: 100%;
-        margin: 5px 15px;
         color: #333;
+        padding: 10px;
+        box-sizing: border-box;
       }
       .title {
         margin: 0;
         width: 100%;
         padding-top: 30px;
         line-height: 1.15;
-        font-size: 32px;
+        font-size: 30px;
         text-align: center;
       }
     `}</style>

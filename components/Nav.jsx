@@ -29,36 +29,36 @@ const Nav = props => {
       </ul>
 
       <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: "Concert One", cursive;
-      }
-      nav {
-        text-align: center;
-        box-shadow: 2px 1px 3px rgba(0,0,0,0.1);
-      }
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 10px 20px;
-        margin: 0;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #666;
-        text-decoration: none;
-        font-size: 16px;
-      }
-      .selected a {
-        color: #067df7;
-      }
-    `}</style>
+        :global(body) {
+          margin: 0;
+          font-family: "Concert One", cursive;
+        }
+        nav {
+          text-align: center;
+          box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+          display: flex;
+          justify-content: space-between;
+        }
+        nav > ul {
+          padding: 10px 20px;
+          margin: 0 auto;
+          max-width: 640px;
+        }
+        li {
+          display: flex;
+          padding: 6px 8px;
+        }
+        a {
+          color: #666;
+          text-decoration: none;
+          font-size: 16px;
+        }
+        .selected a {
+          color: #067df7;
+        }
+      `}</style>
     </nav>
   );
 };

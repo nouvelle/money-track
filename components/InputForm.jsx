@@ -90,13 +90,13 @@ const InputForm = () => {
         .wrapInput,
         .wrapSelect {
           position: relative;
-          width: 80%;
+          width: 90%;
           margin: 40px 3%;
         }
         .wrapDate {
           position: relative;
           display: inline-block;
-          width: 80%;
+          width: 90%;
           margin: 0 3%;
           border-bottom: 1px solid #1b2538;
         }
