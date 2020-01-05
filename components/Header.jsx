@@ -8,6 +8,10 @@ const Header = () => (
       href="https://fonts.googleapis.com/css?family=Concert+One&display=swap"
       rel="stylesheet"
     ></link>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
   </Head>
 );
 
