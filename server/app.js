@@ -85,9 +85,22 @@ app.get("/api/urllist/:type", async (req, res) => {
       }
 
       // Number of day
-      if (monthName === (1 || 3 || 5 || 7 || 8 || 10 || 12)) {
+      if (
+        monthName === 1 ||
+        monthName === 3 ||
+        monthName === 5 ||
+        monthName === 7 ||
+        monthName === 8 ||
+        monthName === 10 ||
+        monthName === 12
+      ) {
         daySpots = 31;
-      } else if (monthName === (4 || 6 || 9 || 11)) {
+      } else if (
+        monthName === 4 ||
+        monthName === 6 ||
+        monthName === 9 ||
+        monthName === 11
+      ) {
         daySpots = 30;
       } else if (
         (yearName % 4 === 0 && yearName % 100 !== 0) ||
