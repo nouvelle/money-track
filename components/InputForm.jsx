@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
 const InputForm = () => {
   const [date, setDate] = useState("");
   const [item, setItem] = useState("");
   const [price, setPrice] = useState(0);
   const [payment, setPayment] = useState("");
-  const dispatch = useDispatch();
+  const [message, setResult] = useState("");
 
   // Click Clear button
   const clickedClear = e => {
     e.preventDefault();
+    setResult("");
+    setDate("");
+    setItem("");
+    setPrice("");
+    setPayment("");
     document.form.reset();
   };
 
@@ -19,8 +23,19 @@ const InputForm = () => {
   const onChangeItem = e => setItem(e.target.value);
   const onChangePrice = e => setPrice(e.target.value);
   const onChangePayment = e => setPayment(e.target.value);
+
+  // Click OK button
   const clickedOk = async e => {
     e.preventDefault();
+    setResult("");
+    setDate("");
+    setItem("");
+    setPrice("");
+    setPayment("");
+    if (!date || !item || !price || !payment) {
+      setResult("All fields are required.");
+      return;
+    }
     const domain = document.domain;
     let reqUrl;
     domain === "localhost"
@@ -41,9 +56,9 @@ const InputForm = () => {
     const rtn = await fetch(reqUrl, { method, headers, body }).then(res => res);
     if (rtn.status === 200) {
       document.form.reset();
-      console.log("OK");
+      setResult("Success!");
     } else {
-      console.log("err");
+      setResult("An error has occurred. Please wait a moment and try again.");
     }
     return rtn.status;
   };
@@ -97,6 +112,11 @@ const InputForm = () => {
             OK
           </button>
         </div>
+        {message === "Success!" ? (
+          <div className="msg success">{message}</div>
+        ) : (
+          <div className="msg error">{message}</div>
+        )}
       </form>
       <style jsx>{`
         .inputArea {
@@ -169,7 +189,7 @@ const InputForm = () => {
           width: 0;
           height: 2px;
           transition: 0.4s;
-          background-color: #067df7;
+          background-color: #668ad8;
         }
         .ef:focus ~ .focus_line,
         .wrapInput.ef ~ .focus_line,
@@ -199,6 +219,16 @@ const InputForm = () => {
           -webkit-transform: translateY(4px);
           transform: translateY(4px);
           border-bottom: none;
+        }
+        .msg {
+          text-align: center;
+          margin-top: 10px;
+        }
+        .msg.success {
+          color: #067df7;
+        }
+        .msg.error {
+          color: #d86666;
         }
       `}</style>
     </div>
