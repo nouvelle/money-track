@@ -28,10 +28,6 @@ const InputForm = () => {
   const clickedOk = async e => {
     e.preventDefault();
     setResult("");
-    setDate("");
-    setItem("");
-    setPrice("");
-    setPayment("");
     if (!date || !item || !price || !payment) {
       setResult("All fields are required.");
       return;
@@ -56,6 +52,10 @@ const InputForm = () => {
     const rtn = await fetch(reqUrl, { method, headers, body }).then(res => res);
     if (rtn.status === 200) {
       document.form.reset();
+      setDate("");
+      setItem("");
+      setPrice("");
+      setPayment("");
       setResult("Success!");
     } else {
       setResult("An error has occurred. Please wait a moment and try again.");
