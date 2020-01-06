@@ -19,17 +19,33 @@ const InputForm = () => {
   const onChangeItem = e => setItem(e.target.value);
   const onChangePrice = e => setPrice(e.target.value);
   const onChangePayment = e => setPayment(e.target.value);
-  const clickedOk = e => {
+  const clickedOk = async e => {
     e.preventDefault();
-    console.log("clicked Ok", date, item, price, payment);
-    dispatch({
-      type: "ADD_INPUT",
-      lastUpdate: Date.now(),
+    const domain = document.domain;
+    let reqUrl;
+    domain === "localhost"
+      ? (reqUrl = `http://${domain}:9000/api/item`)
+      : (reqUrl = "/api/item");
+    const method = "POST";
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+    const body = JSON.stringify({
+      user_id: "eriko",
       date: date,
       item: item,
       price: price,
       payment: payment
     });
+    const rtn = await fetch(reqUrl, { method, headers, body }).then(res => res);
+    if (rtn.status === 200) {
+      document.form.reset();
+      console.log("OK");
+    } else {
+      console.log("err");
+    }
+    return rtn.status;
   };
 
   return (

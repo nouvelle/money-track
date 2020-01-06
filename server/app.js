@@ -130,7 +130,6 @@ app.get("/api/item/:type", async (req, res) => {
 // Insert
 app.post("/api/item", async (req, res) => {
   const body = req.body;
-  // console.log(body);
   try {
     await db.table("track").insert({
       user_id: body.user_id,
