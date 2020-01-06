@@ -37,9 +37,9 @@ app.get("/api", async (req, res) => {
   }
 });
 // Get :type=day/month query: date=yymmdd/date=yymm
-//   day   : /api/urllist/day?date=202001
-//   month : /api/urllist/month?date=20200101
-app.get("/api/urllist/:type", async (req, res) => {
+//   day   : /api/item/day?date=202001
+//   month : /api/item/month?date=20200101
+app.get("/api/item/:type", async (req, res) => {
   const { type } = req.params;
   let { date } = req.query;
   try {
@@ -128,28 +128,27 @@ app.get("/api/urllist/:type", async (req, res) => {
 });
 
 // Insert
-// app.post("/api/urllist", async (req, res) => {
-//   const body = req.body;
-//   try {
-//     await db.table("coffeetime").insert({
-//       URL: body.URL,
-//       date: body.date,
-//       name: body.name,
-//       isRead: body.isRead
-//     });
-//     res.send({
-//       URL: body.URL,
-//       date: body.date,
-//       name: body.name,
-//       isRead: body.isRead
-//     });
-//   } catch (err) {
-//     console.error("Error loading locations!", err);
-//     res.sendStatus(500);
-//   }
-// });
+app.post("/api/item", async (req, res) => {
+  const body = req.body;
+  // console.log(body);
+  try {
+    await db.table("track").insert({
+      user_id: body.user_id,
+      year: body.date.slice(0, 4),
+      month: body.date.slice(5, 7),
+      day: body.date.slice(8, 10),
+      item: body.item,
+      price: body.price,
+      payment: body.payment
+    });
+    res.send("success");
+  } catch (err) {
+    console.error("Error loading locations!", err);
+    res.sendStatus(500);
+  }
+});
 
-// app.patch("/api/urllist", async (req, res) => {
+// app.patch("/api/item", async (req, res) => {
 //   const body = req.body;
 //   try {
 //     await db

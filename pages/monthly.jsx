@@ -12,8 +12,8 @@ const today = new Date();
 
 const getMonthlyData = async date => {
   const param = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2);
-  const url = "http://localhost:9000/api/urllist/month?date=" + param;
-  // const url = "http://localhost:9000/api/urllist/month?date=201911";
+  const url = "http://localhost:9000/api/item/month?date=" + param;
+  // const url = "http://localhost:9000/api/item/month?date=201911";
   const data = await fetch(url).then(res => res.json());
 
   return data;
