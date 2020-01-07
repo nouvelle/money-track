@@ -24,8 +24,10 @@ const getDailyData = async date => {
 
 const Daily = props => {
   const day = props.data;
-  const [viewDate, setViewDate] = useState(today);
-  const [viewData, setViewData] = useState(day);
+  const [view, setView] = useState({
+    date: today,
+    data: day
+  });
 
   const monthName = [
     "January",
@@ -42,23 +44,27 @@ const Daily = props => {
     "December"
   ];
   const msg =
-    monthName[viewDate.getMonth()] +
+    monthName[view.date.getMonth()] +
     " " +
-    viewDate.getDate() +
+    view.date.getDate() +
     ", " +
-    viewDate.getFullYear();
+    view.date.getFullYear();
 
   async function previousDay() {
-    const previous = new Date(viewDate.setDate(viewDate.getDate() - 1));
-    setViewDate(previous);
+    const previous = new Date(view.date.setDate(view.date.getDate() - 1));
     const previousData = await getDailyData(previous);
-    setViewData(previousData);
+    setView({
+      date: previous,
+      data: previousData
+    });
   }
   async function nextDay() {
-    const next = new Date(viewDate.setDate(viewDate.getDate() + 1));
-    setViewDate(next);
+    const next = new Date(view.date.setDate(view.date.getDate() + 1));
     const nextData = await getDailyData(next);
-    setViewData(nextData);
+    setView({
+      date: next,
+      data: nextData
+    });
   }
   return (
     <div>
@@ -69,7 +75,7 @@ const Daily = props => {
         <h1 className="title">{msg}</h1>
         <ChevronRightIcon onClick={nextDay} />
       </div>
-      <Day data={viewData} />
+      <Day data={view.data} />
 
       <style jsx>{`
         .titleBar {
