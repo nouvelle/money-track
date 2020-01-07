@@ -1,34 +1,38 @@
 import React, { useState } from "react";
 
 const InputForm = () => {
-  const [date, setDate] = useState("");
-  const [item, setItem] = useState("");
-  const [price, setPrice] = useState(0);
-  const [payment, setPayment] = useState("");
+  const [data, setData] = useState({
+    date: "",
+    item: "",
+    price: "",
+    payment: ""
+  });
   const [message, setResult] = useState("");
 
   // Click Clear button
   const clickedClear = e => {
     e.preventDefault();
     setResult("");
-    setDate("");
-    setItem("");
-    setPrice("");
-    setPayment("");
+    setData({
+      date: "",
+      item: "",
+      price: "",
+      payment: ""
+    });
     document.form.reset();
   };
 
   // Check value
-  const onChangeDate = e => setDate(e.target.value);
-  const onChangeItem = e => setItem(e.target.value);
-  const onChangePrice = e => setPrice(e.target.value);
-  const onChangePayment = e => setPayment(e.target.value);
+  const onChangeDate = e => setData({ ...data, date: e.target.value });
+  const onChangeItem = e => setData({ ...data, item: e.target.value });
+  const onChangePrice = e => setData({ ...data, price: e.target.value });
+  const onChangePayment = e => setData({ ...data, payment: e.target.value });
 
   // Click OK button
   const clickedOk = async e => {
     e.preventDefault();
     setResult("");
-    if (!date || !item || !price || !payment) {
+    if (!data.date || !data.item || !data.price || !data.payment) {
       setResult("All fields are required.");
       return;
     }
@@ -44,18 +48,20 @@ const InputForm = () => {
     };
     const body = JSON.stringify({
       user_id: "eriko",
-      date: date,
-      item: item,
-      price: price,
-      payment: payment
+      date: data.date,
+      item: data.item,
+      price: data.price,
+      payment: data.payment
     });
     const rtn = await fetch(reqUrl, { method, headers, body }).then(res => res);
     if (rtn.status === 200) {
       document.form.reset();
-      setDate("");
-      setItem("");
-      setPrice("");
-      setPayment("");
+      setData({
+        date: "",
+        item: "",
+        price: "",
+        payment: ""
+      });
       setResult("Success!");
     } else {
       setResult("An error has occurred. Please wait a moment and try again.");
