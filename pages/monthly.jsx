@@ -21,8 +21,10 @@ const getMonthlyData = async date => {
 
 const Monthly = props => {
   const month = props.data;
-  const [viewDate, setViewDate] = useState(today);
-  const [viewData, setViewData] = useState(month);
+  const [view, setView] = useState({
+    date: today,
+    data: month
+  });
 
   const monthName = [
     "January",
@@ -38,19 +40,23 @@ const Monthly = props => {
     "November",
     "December"
   ];
-  const msg = monthName[viewDate.getMonth()] + ", " + viewDate.getFullYear();
+  const msg = monthName[view.date.getMonth()] + ", " + view.date.getFullYear();
 
   async function previousMonth() {
-    const previous = new Date(viewDate.setMonth(viewDate.getMonth() - 1));
-    setViewDate(previous);
+    const previous = new Date(view.date.setMonth(view.date.getMonth() - 1));
     const previousData = await getMonthlyData(previous);
-    setViewData(previousData);
+    setView({
+      date: previous,
+      data: previousData
+    });
   }
   async function nextMonth() {
-    const next = new Date(viewDate.setMonth(viewDate.getMonth() + 1));
-    setViewDate(next);
+    const next = new Date(view.date.setMonth(view.date.getMonth() + 1));
     const nextData = await getMonthlyData(next);
-    setViewData(nextData);
+    setView({
+      date: next,
+      data: nextData
+    });
   }
   return (
     <div>
@@ -61,7 +67,7 @@ const Monthly = props => {
         <h1 className="title">{msg}</h1>
         <ChevronRightIcon onClick={nextMonth} />
       </div>
-      <Month data={viewData} />
+      <Month data={view.data} />
 
       <style jsx>{`
         .titleBar {
