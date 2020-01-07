@@ -147,22 +147,24 @@ app.post("/api/item", async (req, res) => {
   }
 });
 
-// app.patch("/api/item", async (req, res) => {
-//   const body = req.body;
-//   try {
-//     await db
-//       .table("coffeetime")
-//       .where("date", body.date)
-//       .update({
-//         isRead: true,
-//         readDate: body.readDate
-//       });
-//     res.send("success");
-//   } catch (err) {
-//     console.error("Error loading locations!", err);
-//     res.sendStatus(500);
-//   }
-// });
+// Delete
+app.delete("/api/item", async (req, res) => {
+  const { id } = req.query;
+  try {
+    const track = await db
+      .select()
+      .table("track")
+      .where("id", id);
+    await db
+      .table("track")
+      .where("id", id)
+      .del();
+    res.send(track);
+  } catch (err) {
+    console.error("Error loading locations!", err);
+    res.sendStatus(500);
+  }
+});
 
 // Always return the main index.html, since we are developing a single page application
 app.get("*", (req, res) => {
