@@ -30,7 +30,7 @@ This software uses the following open source packages:
 
 I will be adding more function.
 
-- [ ] Delete registered data
+- [x] Delete registered data
 - [ ] Publish to Cloud
 - [ ] Login function
 - [ ] Interactive animations
