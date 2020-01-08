@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Day from "../components/Day";
 /* Material-ui Icon */
+import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -71,9 +72,13 @@ const Daily = props => {
       <Header />
       <Nav page={"Daily"} />
       <div className="titleBar">
-        <ChevronLeftIcon onClick={previousDay} />
+        <IconButton aria-label="left" onClick={previousDay}>
+          <ChevronLeftIcon />
+        </IconButton>
         <h1 className="title">{msg}</h1>
-        <ChevronRightIcon onClick={nextDay} />
+        <IconButton aria-label="right" onClick={nextDay}>
+          <ChevronRightIcon />
+        </IconButton>
       </div>
       <Day data={view.data} />
 

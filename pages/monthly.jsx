@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Month from "../components/Month";
 /* Material-ui Icon */
+import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -63,9 +64,13 @@ const Monthly = props => {
       <Header />
       <Nav page={"Monthly"} />
       <div className="titleBar">
-        <ChevronLeftIcon onClick={previousMonth} />
+        <IconButton aria-label="left" onClick={previousMonth}>
+          <ChevronLeftIcon />
+        </IconButton>
         <h1 className="title">{msg}</h1>
-        <ChevronRightIcon onClick={nextMonth} />
+        <IconButton aria-label="left" onClick={nextMonth}>
+          <ChevronRightIcon />
+        </IconButton>
       </div>
       <Month data={view.data} />
 
