@@ -34,6 +34,7 @@ I will be adding more function.
 - [ ] Publish to Cloud
 - [ ] Login function
 - [ ] Interactive animations
+- [ ] Make input page UI more easier to use
 
 # Contributing
 
