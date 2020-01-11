@@ -1,14 +1,9 @@
 import React from "react";
 /* Component */
-import Header from "./Header";
-import Nav from "./Nav";
 import InputForm from "./InputForm";
 
 const Input = () => (
   <div>
-    <Header />
-    <Nav page={"Input"} />
-
     <div className="wrapInputPage">
       <h1 className="title">Welcome to Money Track!</h1>
       <InputForm />

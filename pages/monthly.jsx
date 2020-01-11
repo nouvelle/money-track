@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import fetch from "isomorphic-unfetch";
 /* Component */
-import Header from "../components/Header";
-import Nav from "../components/Nav";
+import Layout from "../components/Layout";
 import Month from "../components/Month";
 /* Material-ui Icon */
 import IconButton from "@material-ui/core/IconButton";
@@ -14,7 +13,6 @@ const today = new Date();
 const getMonthlyData = async date => {
   const param = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2);
   const url = "http://localhost:9000/api/item/month?date=" + param;
-  // const url = "http://localhost:9000/api/item/month?date=201911";
   const data = await fetch(url).then(res => res.json());
 
   return data;
@@ -60,9 +58,7 @@ const Monthly = props => {
     });
   }
   return (
-    <div>
-      <Header />
-      <Nav page={"Monthly"} />
+    <Layout page={"Monthly"}>
       <div className="titleBar">
         <IconButton aria-label="left" onClick={previousMonth}>
           <ChevronLeftIcon />
@@ -90,7 +86,7 @@ const Monthly = props => {
           text-align: center;
         }
       `}</style>
-    </div>
+    </Layout>
   );
 };
 

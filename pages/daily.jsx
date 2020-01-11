@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import fetch from "isomorphic-unfetch";
 /* Component */
-import Header from "../components/Header";
-import Nav from "../components/Nav";
+import Layout from "../components/Layout";
 import Day from "../components/Day";
 /* Material-ui Icon */
 import IconButton from "@material-ui/core/IconButton";
@@ -67,9 +66,7 @@ const Daily = props => {
     });
   }
   return (
-    <div>
-      <Header />
-      <Nav page={"Daily"} />
+    <Layout page={"Daily"}>
       <div className="titleBar">
         <IconButton aria-label="left" onClick={previousDay}>
           <ChevronLeftIcon />
@@ -97,7 +94,7 @@ const Daily = props => {
           text-align: center;
         }
       `}</style>
-    </div>
+    </Layout>
   );
 };
 
