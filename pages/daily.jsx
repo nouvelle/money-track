@@ -17,7 +17,6 @@ const getDailyData = async date => {
     ("0" + (date.getMonth() + 1)).slice(-2) +
     ("0" + date.getDate()).slice(-2);
   const url = "http://localhost:9000/api/item/day?date=" + param;
-  // const url = "http://localhost:9000/api/item/day?date=20200101";
   const data = await fetch(url).then(res => res.json());
 
   return data;
