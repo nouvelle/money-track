@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 import fetch from "isomorphic-unfetch";
+import moment from "moment";
 /* Component */
 import Layout from "../components/Layout";
 import Month from "../components/Month";
@@ -8,24 +10,23 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const today = new Date();
-
 const getMonthlyData = async date => {
-  const param = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2);
-  const url = "http://localhost:9000/api/item/month?date=" + param;
+  const url = "http://localhost:9000/api/item/month?date=" + date;
   const data = await fetch(url).then(res => res.json());
-
   return data;
 };
 
 const Monthly = props => {
-  const month = props.data;
-  const [view, setView] = useState({
-    date: today,
-    data: month
-  });
+  const { data, today } = props;
+  const preMonth = moment(`${today}01`)
+    .subtract(1, "months")
+    .format("YYYYMM");
+  const nextMonth = moment(`${today}01`)
+    .add(1, "months")
+    .format("YYYYMM");
 
   const monthName = [
+    "",
     "January",
     "February",
     "March",
@@ -39,36 +40,25 @@ const Monthly = props => {
     "November",
     "December"
   ];
-  const msg = monthName[view.date.getMonth()] + ", " + view.date.getFullYear();
+  const msg =
+    monthName[Number(today.slice(4, 6))] + ", " + Number(today.slice(0, 4));
 
-  async function previousMonth() {
-    const previous = new Date(view.date.setMonth(view.date.getMonth() - 1));
-    const previousData = await getMonthlyData(previous);
-    setView({
-      date: previous,
-      data: previousData
-    });
-  }
-  async function nextMonth() {
-    const next = new Date(view.date.setMonth(view.date.getMonth() + 1));
-    const nextData = await getMonthlyData(next);
-    setView({
-      date: next,
-      data: nextData
-    });
-  }
   return (
     <Layout page={"Monthly"}>
       <div className="titleBar">
-        <IconButton aria-label="left" onClick={previousMonth}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <Link href={`?date=${preMonth}`}>
+          <IconButton aria-label="left">
+            <ChevronLeftIcon />
+          </IconButton>
+        </Link>
         <h1 className="title">{msg}</h1>
-        <IconButton aria-label="left" onClick={nextMonth}>
-          <ChevronRightIcon />
-        </IconButton>
+        <Link href={`?date=${nextMonth}`}>
+          <IconButton aria-label="left">
+            <ChevronRightIcon />
+          </IconButton>
+        </Link>
       </div>
-      <Month data={view.data} />
+      <Month data={data} />
 
       <style jsx>{`
         .titleBar {
@@ -90,9 +80,13 @@ const Monthly = props => {
   );
 };
 
-Monthly.getInitialProps = async () => {
-  const data = await getMonthlyData(today);
-  return { data: data };
+Monthly.getInitialProps = async context => {
+  const { date } = context.query;
+  const data = await getMonthlyData(date);
+  return {
+    data: data,
+    today: date
+  };
 };
 
 export default Monthly;

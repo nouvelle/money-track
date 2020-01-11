@@ -1,19 +1,19 @@
 import React from "react";
+import moment from "moment";
 
-const param = date => {
-  return (
-    date.getFullYear() +
-    ("0" + (date.getMonth() + 1)).slice(-2) +
-    ("0" + date.getDate()).slice(-2)
-  );
-};
-
-const today = param(new Date());
+const today = moment().format("YYYYMMDD");
+const thisMonth = moment().format("YYYYMM");
 
 const links = [
   { href: "/", label: "Input" },
-  { href: `/daily?date=${today}`, label: "Daily" },
-  { href: "/monthly", label: "Monthly" },
+  {
+    href: `/daily?date=${today}`,
+    label: "Daily"
+  },
+  {
+    href: `/monthly?date=${thisMonth}`,
+    label: "Monthly"
+  },
   { href: "/login", label: "Login" }
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`;

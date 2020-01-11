@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
+import moment from "moment";
 /* Component */
 import Layout from "../components/Layout";
 import Day from "../components/Day";
@@ -17,10 +18,15 @@ const getDailyData = async date => {
 
 const Daily = props => {
   const { data, today } = props;
-  const preDay = Number(today) - 1;
-  const nexDay = Number(today) + 1;
+  const preDay = moment(today)
+    .subtract(1, "days")
+    .format("YYYYMMDD");
+  const nextDay = moment(today)
+    .add(1, "days")
+    .format("YYYYMMDD");
 
   const monthName = [
+    "",
     "January",
     "February",
     "March",
@@ -51,7 +57,7 @@ const Daily = props => {
           </IconButton>
         </Link>
         <h1 className="title">{msg}</h1>
-        <Link href={`?date=${nexDay}`}>
+        <Link href={`?date=${nextDay}`}>
           <IconButton aria-label="right">
             <ChevronRightIcon />
           </IconButton>
