@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 /* Component */
 import Layout from "../components/Layout";
@@ -8,25 +9,16 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const today = new Date();
-
 const getDailyData = async date => {
-  const param =
-    date.getFullYear() +
-    ("0" + (date.getMonth() + 1)).slice(-2) +
-    ("0" + date.getDate()).slice(-2);
-  const url = "http://localhost:9000/api/item/day?date=" + param;
+  const url = "http://localhost:9000/api/item/day?date=" + date;
   const data = await fetch(url).then(res => res.json());
-
   return data;
 };
 
 const Daily = props => {
-  const day = props.data;
-  const [view, setView] = useState({
-    date: today,
-    data: day
-  });
+  const { data, today } = props;
+  const preDay = Number(today) - 1;
+  const nexDay = Number(today) + 1;
 
   const monthName = [
     "January",
@@ -42,41 +34,30 @@ const Daily = props => {
     "November",
     "December"
   ];
-  const msg =
-    monthName[view.date.getMonth()] +
-    " " +
-    view.date.getDate() +
-    ", " +
-    view.date.getFullYear();
 
-  async function previousDay() {
-    const previous = new Date(view.date.setDate(view.date.getDate() - 1));
-    const previousData = await getDailyData(previous);
-    setView({
-      date: previous,
-      data: previousData
-    });
-  }
-  async function nextDay() {
-    const next = new Date(view.date.setDate(view.date.getDate() + 1));
-    const nextData = await getDailyData(next);
-    setView({
-      date: next,
-      data: nextData
-    });
-  }
+  const msg =
+    monthName[Number(today.slice(4, 6))] +
+    " " +
+    Number(today.slice(6, 8)) +
+    ", " +
+    Number(today.slice(0, 4));
+
   return (
     <Layout page={"Daily"}>
       <div className="titleBar">
-        <IconButton aria-label="left" onClick={previousDay}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <Link href={`?date=${preDay}`}>
+          <IconButton aria-label="left">
+            <ChevronLeftIcon />
+          </IconButton>
+        </Link>
         <h1 className="title">{msg}</h1>
-        <IconButton aria-label="right" onClick={nextDay}>
-          <ChevronRightIcon />
-        </IconButton>
+        <Link href={`?date=${nexDay}`}>
+          <IconButton aria-label="right">
+            <ChevronRightIcon />
+          </IconButton>
+        </Link>
       </div>
-      <Day data={view.data} />
+      <Day data={data} />
 
       <style jsx>{`
         .titleBar {
@@ -98,9 +79,10 @@ const Daily = props => {
   );
 };
 
-Daily.getInitialProps = async () => {
-  const data = await getDailyData(today);
-  return { data: data };
+Daily.getInitialProps = async context => {
+  const { date } = context.query;
+  const data = await getDailyData(date);
+  return { data: data, today: date };
 };
 
 export default Daily;

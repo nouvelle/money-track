@@ -1,8 +1,18 @@
 import React from "react";
 
+const param = date => {
+  return (
+    date.getFullYear() +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    ("0" + date.getDate()).slice(-2)
+  );
+};
+
+const today = param(new Date());
+
 const links = [
   { href: "/", label: "Input" },
-  { href: "/daily", label: "Daily" },
+  { href: `/daily?date=${today}`, label: "Daily" },
   { href: "/monthly", label: "Monthly" },
   { href: "/login", label: "Login" }
 ].map(link => {
