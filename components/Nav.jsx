@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import moment from "moment";
+/* Component */
+import Login from "./Login";
 
 const today = moment().format("YYYYMMDD");
 const thisMonth = moment().format("YYYYMM");
@@ -15,7 +17,7 @@ const links = [
     href: `/monthly?date=${thisMonth}`,
     label: "Monthly"
   },
-  { href: "/login", label: "Login" }
+  { label: "Login" }
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`;
   return link;
@@ -26,21 +28,31 @@ const Nav = props => {
   return (
     <nav>
       <ul>
-        {links.map(({ key, href, label }) =>
-          props.page === label ? (
-            <Link key={key} href={href}>
-              <li className="selected">
-                <a>{label}</a>
-              </li>
-            </Link>
-          ) : (
-            <Link key={key} href={href}>
+        {links.map(({ key, href, label }) => {
+          if (label === "Login") {
+            return (
               <li>
-                <a>{label}</a>
+                <Login key={key} />
               </li>
-            </Link>
-          )
-        )}
+            );
+          } else if (props.page === label) {
+            return (
+              <Link key={key} href={href}>
+                <li className="selected">
+                  <a>{label}</a>
+                </li>
+              </Link>
+            );
+          } else {
+            return (
+              <Link key={key} href={href}>
+                <li>
+                  <a>{label}</a>
+                </li>
+              </Link>
+            );
+          }
+        })}
       </ul>
 
       <style jsx>{`
