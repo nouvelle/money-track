@@ -10,7 +10,11 @@ const DailyTable = props => {
     return (total += data.price);
   }, 0);
   const deleteItem = async id => {
-    const url = "http://localhost:9000/api/item?id=" + id;
+    const domain = document.domain;
+    let url;
+    domain === "localhost"
+      ? (url = `http://${domain}:9000/api/item?id=${id}`)
+      : (url = `/api/item?id=${id}`);
     const method = "DELETE";
     const data = await fetch(url, { method }).then(res => res.json());
     setdailyData(dailyData.filter(daily => daily.id !== data[0].id));

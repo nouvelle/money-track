@@ -6,7 +6,7 @@ import Barchart from "./Barchart";
 const Month = props => {
   return (
     <div className="monthly">
-      {Object.keys(props.data.daily).length === 0 ? (
+      {Object.keys(props.data).length === 0 ? (
         <p className="noEntry">No Entry</p>
       ) : (
         <>

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-/* Component */
-// import Layout from "../components/Layout";
 /* firebase */
 import firebase from "firebase/app";
 import "firebase/auth";
