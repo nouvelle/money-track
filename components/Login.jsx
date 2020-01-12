@@ -23,7 +23,7 @@ const Login = () => {
   const login = () => {
     console.log("login");
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
+    firebase.auth().signInWithPopup(provider);
   };
   const logout = () => {
     console.log("logout");

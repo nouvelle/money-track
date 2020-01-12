@@ -32,7 +32,7 @@ const Nav = props => {
           if (label === "Login") {
             return (
               <li key={key}>
-                <Login key={key} />
+                <Login />
               </li>
             );
           } else if (props.page === label) {
