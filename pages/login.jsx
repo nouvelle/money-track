@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 /* Component */
 import Layout from "../components/Layout";
 /* firebase */
-import firebase from "firebase";
-// import firebase from "../config/firebase";
+import firebase from "firebase/app";
 
-const Login = () => {
+const Login = props => {
+  console.log(props);
   // const [user, setUser] = useState("");
 
   // useEffect(() => {
@@ -18,14 +17,21 @@ const Login = () => {
   // });
 
   const login = () => {
-    console.log("login", firebase);
+    console.log("login");
     const provider = new firebase.auth.GoogleAuthProvider();
     // firebase.auth().signInWithRedirect(provider);
-    firebase.auth().signInWithPopup(provider);
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        console.log("login!!", result);
+        // props.onLogined();
+      });
   };
   const logout = () => {
     console.log("logout");
     firebase.auth().signOut();
+    // props.onLogouted();
   };
 
   return (
@@ -55,4 +61,3 @@ const Login = () => {
 };
 
 export default Login;
-// export default connect(state => state)(Login);
