@@ -64,6 +64,7 @@ const Nav = props => {
         li {
           display: flex;
           padding: 6px 8px;
+          cursor: pointer;
         }
         a {
           color: #666;
