@@ -3,47 +3,42 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 /* firebase */
 import firebase from "firebase/app";
+import "firebase/auth";
+import { firebaseConfig } from "../config/firebase";
 
-const Login = props => {
-  console.log(props);
-  // const [user, setUser] = useState("");
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-  // useEffect(() => {
-  //   console.log(firebase);
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     console.log(user);
-  //     return setUser(user);
-  //   });
-  // });
+const Login = () => {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      return setUser(user);
+    });
+  });
 
   const login = () => {
     console.log("login");
     const provider = new firebase.auth.GoogleAuthProvider();
-    // firebase.auth().signInWithRedirect(provider);
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(result => {
-        console.log("login!!", result);
-        // props.onLogined();
-      });
+    firebase.auth().signInWithRedirect(provider);
   };
   const logout = () => {
     console.log("logout");
     firebase.auth().signOut();
-    // props.onLogouted();
   };
 
   return (
     <Layout page={"Login"}>
       <h1>This page is Login</h1>
-      {/* <p>UID: {user && user.uid}</p> */}
+      <p>UID: {user && user.uid}</p>
       <div>
-        {/* {user ? ( */}
-        <button onClick={logout}>Google Logout</button>
-        {/* ) : ( */}
-        <button onClick={login}>Google Login</button>
-        {/* )} */}
+        {user ? (
+          <button onClick={logout}>Google Logout</button>
+        ) : (
+          <button onClick={login}>Google Login</button>
+        )}
       </div>
 
       <style jsx>{`
