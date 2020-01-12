@@ -31,7 +31,7 @@ const Nav = props => {
         {links.map(({ key, href, label }) => {
           if (label === "Login") {
             return (
-              <li>
+              <li key={key}>
                 <Login key={key} />
               </li>
             );
