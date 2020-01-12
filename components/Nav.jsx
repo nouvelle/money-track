@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import moment from "moment";
 
 const today = moment().format("YYYYMMDD");
@@ -27,13 +28,17 @@ const Nav = props => {
       <ul>
         {links.map(({ key, href, label }) =>
           props.page === label ? (
-            <li key={key} className="selected">
-              <a href={href}>{label}</a>
-            </li>
+            <Link key={key} href={href}>
+              <li className="selected">
+                <a>{label}</a>
+              </li>
+            </Link>
           ) : (
-            <li key={key}>
-              <a href={href}>{label}</a>
-            </li>
+            <Link key={key} href={href}>
+              <li>
+                <a>{label}</a>
+              </li>
+            </Link>
           )
         )}
       </ul>

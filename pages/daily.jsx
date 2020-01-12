@@ -10,12 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const getDailyData = async date => {
-  const url = "http://localhost:9000/api/item/day?date=" + date;
-  const data = await fetch(url).then(res => res.json());
-  return data;
-};
-
 const Daily = props => {
   const { data, today } = props;
   const preDay = moment(today)
@@ -87,7 +81,9 @@ const Daily = props => {
 
 Daily.getInitialProps = async context => {
   const { date } = context.query;
-  const data = await getDailyData(date);
+  const url = "http://localhost:9000/api/item/day?date=" + date;
+  const data = await fetch(url).then(res => res.json());
+
   return { data: data, today: date };
 };
 

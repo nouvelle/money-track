@@ -2,7 +2,6 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 const Barchart = props => {
-  console.log(props);
   const { daily, daySpots } = props.data;
   const data = {
     labels: [],

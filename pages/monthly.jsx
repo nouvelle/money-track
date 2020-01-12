@@ -10,12 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const getMonthlyData = async date => {
-  const url = "http://localhost:9000/api/item/month?date=" + date;
-  const data = await fetch(url).then(res => res.json());
-  return data;
-};
-
 const Monthly = props => {
   const { data, today } = props;
   const preMonth = moment(`${today}01`)
@@ -82,7 +76,8 @@ const Monthly = props => {
 
 Monthly.getInitialProps = async context => {
   const { date } = context.query;
-  const data = await getMonthlyData(date);
+  const url = "http://localhost:9000/api/item/month?date=" + date;
+  const data = await fetch(url).then(res => res.json());
   return {
     data: data,
     today: date
